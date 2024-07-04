@@ -1,0 +1,12 @@
+{% extends "core/base.html" %}
+
+{% block title %}CV Maker Registeration{% endblock %}
+
+{% block body %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Signup</button>
+    </form>
+{% endblock %}
+    

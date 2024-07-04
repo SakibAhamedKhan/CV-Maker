@@ -1,0 +1,60 @@
+{% extends "core/base.html" %}
+
+{% block title %}CV Make Page{% endblock %}
+
+{% block body %}
+    {% if messages %}
+        {% for m in messages %}
+        <div class="alert alert-{{m.tags}}">
+            {{m}}
+        </div>    
+        {% endfor %}
+    {% endif %}
+    <div class="container my-5 px-5 pb-5 shadow">
+        <h1 class="text-center">Make your CV</h1>
+        <form class="" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="text" class="form-control" id="email" name="email">
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="text" class="form-control" id="phone" name="phone">
+            </div>
+            <div class="mb-3">
+                <label for="summary" class="form-label">Summary</label>
+                <textarea type="text" class="form-control" id="summary" name="summary"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="degree" class="form-label">Degree</label>
+                <input type="text" class="form-control" id="degree" name="degree">
+            </div>
+            <div class="mb-3">
+                <label for="school" class="form-label">School</label>
+                <input type="text" class="form-control" id="school" name="school">
+            </div>
+            <div class="mb-3">
+                <label for="university" class="form-label">University</label>
+                <input type="text" class="form-control" id="university" name="university">
+            </div>
+            <div class="mb-3">
+                <label for="previouse_work" class="form-label">Previouse Work</label>
+                <textarea type="text" class="form-control" id="previouse_work" name="previouse_work"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="skills" class="form-label">Skills</label>
+                <textarea type="text" class="form-control" id="skills" name="skills"></textarea>
+            </div>
+    
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    
+    </div>
+
+{% endblock %}
+
