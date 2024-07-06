@@ -33,7 +33,8 @@ urlpatterns = [
     path('login/', authentication_views.LoginView.as_view(template_name='author/login.html'), name="login"),
     path('logout/',author_views.logout_view, name="logout"),
     path('profile/',author_views.profilepage, name="profile"),
-
+    path('edit/<int:id>/', pdf_views.editCv , name='edit'),
+    path('delete/<int:id>/', pdf_views.deleteCv , name='delete'),
 
 ]
 

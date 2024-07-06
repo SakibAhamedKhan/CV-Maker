@@ -27,6 +27,10 @@ def accept(request):
 
         cv = CV(user = request.user, name=name, email=email, phone=phone, summary=summary, degree=degree, school=school, university=university, previouse_work=previouse_work, skills=skills)
         cv.save()
+        
+        messages.success(request, f'Success CV created')
+
+        return redirect('list')
     return render(request, 'pdf/accept.html')
 
 
@@ -56,3 +60,41 @@ def resume(request, id):
 def list(request):
     profile = CV.objects.filter(user=request.user)
     return render(request, 'pdf/list.html', {'profiles':profile})
+
+
+def editCv(request, id):
+    cv = CV.objects.get(pk=id);
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        summary = request.POST.get('summary')
+        degree = request.POST.get('degree')
+        school = request.POST.get('school')
+        university = request.POST.get('university')
+        previouse_work = request.POST.get('previouse_work')
+        skills = request.POST.get('skills')
+
+        
+        cv.name = name
+        cv.email = email
+        cv.phone = phone
+        cv.summary = summary
+        cv.degree = degree
+        cv.school = school
+        cv.university = university
+        cv.previouse_work = previouse_work
+        cv.skills = skills
+        cv.save()
+        messages.success(request, f'Update Succefully')
+
+        return redirect('list') 
+
+    return render(request, 'pdf/edit.html', {'cv': cv})
+
+
+def deleteCv(request, id):
+    cv = CV.objects.get(pk=id);
+    cv.delete();
+    messages.success(request, f'Delete Succefully')
+    return redirect('list')

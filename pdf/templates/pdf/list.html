@@ -1,15 +1,22 @@
 {% extends "core/base.html" %}
 
-{% block title %}CV List{% endblock %}
+{% block title %}My All CV{% endblock %}
 
 {% block style %}
 <style>
-.list-group-item:hover{
-    background-color: rgb(195, 195, 255) !important;
-}
+    .list-group-item:hover {
+        background-color: rgb(195, 195, 255) !important;
+    }
 </style>
 {% endblock %}
 {% block body %}
+{% if messages %}
+{% for m in messages %}
+<div class="alert alert-{{m.tags}}">
+    {{m}}
+</div>
+{% endfor %}
+{% endif %}
 <div class="container">
     <div class="row m-5">
         <div class="col-md-12">
@@ -30,13 +37,19 @@
                 <a href="/{{profile.id}}" class="btn btn-warning">Download</a>
             </div>
         </div>    -->
-    <ul class="list-group w-75 mx-auto" >
+    <ul class="list-group w-75 mx-auto">
         <li class="list-group-item d-flex justify-content-between align-items-center my-1">
             <p class="m-0">{{profile.name}}</p>
             <!-- <span class="badge bg-primary rounded-pill">14</span> -->
             <div>
-                <button type="button" class="btn btn-sm btn-primary me-2 rounded-pill" data-bs-toggle="modal" data-bs-target="#previewModal"
-                    onclick="handlePreview('{{profile.id}}')">
+                <a href="{% url 'edit' profile.id%}" class="btn btn-sm btn-primary me-2 rounded-pill">
+                    Edit
+                </a>
+                <a href="{% url 'delete' profile.id%}" class="btn btn-sm btn-danger me-2 rounded-pill" >
+                    Delete
+                </a>
+                <button type="button" class="btn btn-sm btn-success me-2 rounded-pill" data-bs-toggle="modal"
+                    data-bs-target="#previewModal" onclick="handlePreview('{{profile.id}}')">
                     Preview PDF
                 </button>
                 <a href="/{{profile.id}}" class="btn btn-sm btn-warning rounded-pill">Download</a>

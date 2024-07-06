@@ -4,6 +4,79 @@
 
 {% block body %}
 
-<h1>Profile</h1>
-<img src="{{user.userinfo.image.url}}" alt="" srcset="" class="w-25">
+
+{% if messages %}
+{% for m in messages %}
+<div class="alert alert-{{m.tags}}">
+    {{m}}
+</div>
+{% endfor %}
+{% endif %}
+
+<div class="container rounded bg-white">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-4">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <img class="rounded-circle mt-5" width="150px" src="{{user.userinfo.image.url}}">
+                <span class="font-weight-bold my-2">{{user.username}}</span><span
+                    class="text-black-50">{{user.email}}</span><span>
+                </span>
+            </div>
+        </div>
+        <form method="post"  enctype="multipart/form-data" class="col-md-7 border-right">
+            {% csrf_token %}
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Profile Settings</h4>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6"><label class="labels">First Name</label>
+                        <input type="text" class="form-control" name="first_name"
+                            value="{{ user.first_name|default:''}}">
+                    </div>
+                    <div class="col-md-6"><label class="labels">Last Name</label>
+                        <input type="text" class="form-control" name="last_name" value="{{ user.last_name|default:''}}">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12 mb-2"><label class="labels">Email</label>
+                        <input type="text" class="form-control" name="email" value="{{ user.email|default:''}}">
+                    </div>
+                    <div class="col-md-12 mb-2"><label class="labels">Address</label>
+                        <input type="text" class="form-control" name="address" value="{{ user.address|default:''}}">
+                    </div>
+                    <div class="col-md-12 mb-2"><label class="labels">Zip Code</label>
+                        <input type="text" class="form-control" name="zip_code" value="{{ user.zip_code|default:''}}">
+                    </div>
+                    <div class="col-md-12 mb-2"><label class="labels">Age</label>
+                        <input type="text" class="form-control" name="age" value="{{ user.age|default:''}}">
+                    </div>
+                    <div class="col-md-12 mb-2"><label class="labels">Birth Date</label>
+                        <input type="date" class="form-control" name="birth_date"
+                            value="{{ user.birth_date|date:'Y-m-d' }}">
+                    </div>
+                    <div class="col-md-12 mb-2"><label class="labels">Profile Image</label>
+                        <input type="file" class="form-control-file mt-2" id="imageUpload" name="image" accept="image/*">
+                    </div>
+
+                    <div class="col-md-12"><label class="labels">Education</label>
+                        <input type="text" class="form-control" name="education" value="{{ userInfo.education|default:''}}">
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6"><label class="labels">Country</label>
+                        <input type="text" class="form-control" name="country" value="{{ userInfo.country|default:''}}">
+                    </div>
+                    <div class="col-md-6"><label class="labels">State/Region</label>
+                        <input type="text" class="form-control" name="state" value="{{ userInfo.state|default:''}}">
+                    </div>
+                </div>
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save
+                        Profile</button></div>
+            </div>
+        </form>
+
+        
+    </div>
+</div>
 {% endblock %}

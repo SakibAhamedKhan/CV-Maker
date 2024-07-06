@@ -1,6 +1,6 @@
 {% extends "core/base.html" %}
 
-{% block title %}Make now{% endblock %}
+{% block title %}Edit{% endblock %}
 
 {% block body %}
     {% if messages %}
@@ -11,44 +11,44 @@
         {% endfor %}
     {% endif %}
     <div class="container my-5 px-5 pb-5 shadow">
-        <h1 class="text-center">Make your CV</h1>
+        <h1 class="text-center">Edit your CV {{cv.id}}</h1>
         <form class="" method="post">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name">
+                <input type="text" class="form-control" id="name" name="name" value="{{ cv.name}}">
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="text" class="form-control" id="email" name="email">
+                <input type="text" class="form-control" id="email" name="email" value="{{ cv.email}}">
             </div>
             <div class="mb-3">
                 <label for="phone" class="form-label">Phone</label>
-                <input type="text" class="form-control" id="phone" name="phone">
+                <input type="text" class="form-control" id="phone" name="phone" value="{{ cv.phone}}">
             </div>
             <div class="mb-3">
                 <label for="summary" class="form-label">Summary</label>
-                <textarea type="text" class="form-control" id="summary" name="summary"></textarea>
+                <textarea type="text" class="form-control" id="summary" name="summary" >{{ cv.summary}}</textarea>
             </div>
             <div class="mb-3">
                 <label for="degree" class="form-label">Degree</label>
-                <input type="text" class="form-control" id="degree" name="degree">
+                <input type="text" class="form-control" id="degree" name="degree" value="{{ cv.degree}}">
             </div>
             <div class="mb-3">
                 <label for="school" class="form-label">School</label>
-                <input type="text" class="form-control" id="school" name="school">
+                <input type="text" class="form-control" id="school" name="school" value="{{ cv.school}}">
             </div>
             <div class="mb-3">
                 <label for="university" class="form-label">University</label>
-                <input type="text" class="form-control" id="university" name="university">
+                <input type="text" class="form-control" id="university" name="university" value="{{ cv.university}}">
             </div>
             <div class="mb-3">
                 <label for="previouse_work" class="form-label">Previouse Work</label>
-                <textarea type="text" class="form-control" id="previouse_work" name="previouse_work"></textarea>
+                <textarea type="text" class="form-control" id="previouse_work" name="previouse_work">{{cv.previouse_work}}</textarea>
             </div>
             <div class="mb-3">
                 <label for="skills" class="form-label">Skills</label>
-                <textarea type="text" class="form-control" id="skills" name="skills"></textarea>
+                <textarea type="text" class="form-control" id="skills" name="skills">{{ cv.skills}}</textarea>
             </div>
     
             <button type="submit" class="btn btn-primary">Submit</button>
