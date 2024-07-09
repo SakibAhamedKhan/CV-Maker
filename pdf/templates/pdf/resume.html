@@ -3,27 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Resume</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+        .container{
+            margin: 50px;
+        }
+        .header, .section {
+            margin-bottom: 20px;
+        }
+        .header {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+        }
+        .header img {
+            border-radius: 10px;
+            width: 120px;
+            height: 120px;
+            float: right;
+            margin-top: -110px;
+            object-fit: cover;
+        }
+        h2, p, li {
+            margin: 0;
+            padding: 0;
+        }
+        hr {
+            border: 1px solid #ddd;
+            margin: 20px 0;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .section-title {
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+        .contact-info p {
+            margin: 0;
+        }
+        .contact-info h1 {
+            margin: 0;
+            padding-top: 20px;
+        }
+       
+    </style>
 </head>
 <body>
-    <h2>{{user_profile.name}}</h2>
-    <h2>{{user_profile.email}}</h2>
-    <h2>{{user_profile.phone}}</h2>
-    <hr>
-    <br>
-    <p>Summary</p>
-    <p>{{user_profile.summary}}</p>
-    <hr>
-    <p>Skills</p>
-    <p>{{user_profile.skills}}</p>
-    <hr>
-    <p>Educations</p>
-    <ul>
-        <li>{{user_profile.school}}</li>
-        <li>{{user_profile.degree}} from {{user_profile.university}}</li>
-    </ul>
-    <hr>
-    <p>Previouse work</p>
-    <p>{{user_profile.previouse_work}}</p>
+    <div class="container">
+        <div class="header">
+            <div class="contact-info">
+                <h1 clas>{{ user_profile.name }}</h1>
+                <p>Email: {{ user_profile.email }}</p>
+                <p>Phone: {{ user_profile.phone }}</p>
+            </div>
+            <div><img src="{{ user_profile.image }}"  alt="Profile Image"></div>
+            
+        </div>
+        <hr>
+        <div class="section content">
+            <p class="section-title">Summary</p>
+            <p>{{ user_profile.summary }}</p>
+        </div>
+        <hr>
+        <div class="section content">
+            <p class="section-title">Skills</p>
+            <p>{{ user_profile.skills }}</p>
+        </div>
+        <hr>
+        <div class="section content">
+            <p class="section-title">Projects</p>
+            <p>{{ user_profile.project }}</p>
+        </div>
+        <hr>
+        <div class="section content">
+            <p class="section-title">Education</p>
+            <ul>
+                <li>{{ user_profile.school }}</li>
+                <li>{{ user_profile.degree }} from {{ user_profile.university }}</li>
+            </ul>
+        </div>
+        <hr>
+        <div class="section content">
+            <p class="section-title">Previous Work</p>
+            <p>{{ user_profile.previouse_work }}</p>
+        </div>
+        <hr>
+        <div class="section content">
+            <p class="section-title">Language</p>
+            <p>{{ user_profile.language }}</p>
+        </div>
+       
+        
+    </div>
 </body>
 </html>

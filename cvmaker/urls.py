@@ -30,11 +30,14 @@ urlpatterns = [
     path('<int:id>/', pdf_views.resume, name="resume"),
     path('list/', pdf_views.list, name="list"),
     path('register/', author_views.register, name="register"),
-    path('login/', authentication_views.LoginView.as_view(template_name='author/login.html'), name="login"),
+    # path('login/', authentication_views.LoginView.as_view(template_name='author/login.html'), name="login"),
+    path('login/', author_views.login_view, name="login"),
     path('logout/',author_views.logout_view, name="logout"),
     path('profile/',author_views.profilepage, name="profile"),
     path('edit/<int:id>/', pdf_views.editCv , name='edit'),
     path('delete/<int:id>/', pdf_views.deleteCv , name='delete'),
+    path('contact/', author_views.contact, name="contact"),
+    path('about/', author_views.about, name="about"),
 
 ]
 

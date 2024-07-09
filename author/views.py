@@ -2,10 +2,11 @@ from django.shortcuts import render,redirect
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import RegisterForm
-from django.contrib.auth import logout
-from .models import UserInfo, CustomUser
+from django.contrib.auth import logout, authenticate, login
+from .models import UserInfo, CustomUser, ContactUs
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
 # Create your views here.
 
 def register(request):
@@ -14,7 +15,7 @@ def register(request):
          if form.is_valid():
             user=form.save()
             username =  form.cleaned_data.get('username')
-            ui = UserInfo(user=user, location="Not set yate")
+            ui = UserInfo(user=user)
             ui.save()
             messages.success(request, f'Welcome {username}, your account is created')
             return redirect('login')
@@ -62,6 +63,41 @@ def profilepage(request):
     
     return render(request, 'author/profile.html', {'userInfo':userInfo})
 
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request=request, data=request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['username']
+            userpass = form.cleaned_data['password']
+            user = authenticate(username=name, password=userpass)
+            if user is not None:
+                login(request, user)
+                messages.success(request, f'Success fully logged {name}!')
+                return redirect('home')
+        else:
+            messages.warning(request, 'Login informtion incorrect') 
+            return redirect('login')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'author/login.html', {'form': form})
+
+            
 def logout_view(request):
     logout(request)
     return render(request, 'core/home.html')
+
+def contact(request):
+    if request.method=='POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        message = request.POST.get('message')
+        print(name, email, phone, message)
+        ContactUs.objects.create(name = name, email= email, phone = phone, message = message)
+        messages.success(request, f'Successfully submited {name}!')
+
+
+    return render(request, 'author/contact.html')
+
+def about(request):
+    return render(request, 'author/about.html')

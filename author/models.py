@@ -31,9 +31,19 @@ class CustomUser(AbstractUser):
 class UserInfo(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     image = models.ImageField(default='profilepic.jpg', upload_to='profile_pictures')
-    country = models.CharField(max_length=100)
+    country = models.CharField(max_length=100, default='')
     education = models.CharField(max_length=200, default='')
     state = models.CharField(max_length=200 , default='')
 
     def __str__(self) -> str:
         return self.user.username
+    
+
+class ContactUs(models.Model):
+    name = models.CharField(max_length=200)
+    email = models.EmailField(max_length=200)
+    phone = models.CharField(max_length=20)
+    message = models.TextField(max_length=1000)
+    time = models.DateField(auto_now_add=True)
+    def __str__(self):
+        return f'{self.name} {self.email} {self.time}'

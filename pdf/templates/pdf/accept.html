@@ -12,7 +12,7 @@
     {% endif %}
     <div class="container my-5 px-5 pb-5 shadow">
         <h1 class="text-center">Make your CV</h1>
-        <form class="" method="post">
+        <form class="" enctype="multipart/form-data"  method="post">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
@@ -51,6 +51,18 @@
                 <textarea type="text" class="form-control" id="skills" name="skills"></textarea>
             </div>
     
+            <div class="mb-3">
+                <label for="skills" class="form-label">Language</label>
+                <textarea type="text" class="form-control" id="language" name="language"></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="skills" class="form-label">Resume Image</label>
+                <input type="file" class="form-control-file mt-2" id="imageUpload" name="image" accept="image/*">
+            </div>
+            <div class="mb-3">
+                <label for="skills" class="form-label">Projects</label>
+                <textarea type="text" class="form-control" id="project" name="project"></textarea>
+            </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     

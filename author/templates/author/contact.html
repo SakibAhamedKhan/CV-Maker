@@ -1,0 +1,60 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}
+  Contact Us
+{% endblock %}
+
+{% block body %}
+
+{% if messages %}
+{% for m in messages %}
+<div class="alert alert-{{m.tags}}">
+    {{m}}
+</div>
+{% endfor %}
+{% endif %}
+
+  <div class="container mt-4">
+    <div class="row  p-4 p-sm-5 p-md-6 d-flex flex-row">
+        <div class="col-md-6">
+            <!-- Card header -->
+            <div class="card-header border-bottom px-0 pt-0 pb-5">
+              <!-- Title -->
+              <h1 class="mb-3 h3">Contact with use,</h1>
+              <p class="mb-0">
+                You can reach us anytime via <a href="#">cvmaker@gmail.com</a>
+              </p>
+            </div>
+            <!-- Card body & form -->
+            <form method="post" class="card-body px-0 pb-0 pt-5">
+                {% csrf_token %}
+              <!-- Name -->
+              <div class="input-floating-label form-floating mb-4">
+                <input type="text" class="form-control bg-transparent" id="floatingName" placeholder="name" name="name" />
+                <label for="floatingName">Your name</label>
+              </div>
+              <!-- Email -->
+              <div class="input-floating-label form-floating mb-4">
+                <input type="email" class="form-control bg-transparent" id="floatingInput" placeholder="name@example.com" name="email" />
+                <label for="floatingInput">Email address</label>
+              </div>
+              <!-- Number -->
+              <div class="input-floating-label form-floating mb-4">
+                <input type="text" class="form-control bg-transparent" id="floatingNumber" placeholder="phone" name="phone" />
+                <label for="floatingNumber">Phone number</label>
+              </div>
+              <!-- Message -->
+              <div class="input-floating-label form-floating mb-4">
+                <textarea class="form-control bg-transparent" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" name="message"></textarea>
+                <label for="floatingTextarea2">Message</label>
+              </div>
+              <!-- Button -->
+              <button class="btn btn-lg btn-primary mb-0">Send a message</button>
+            </form>
+          </div>
+          <div class="col-md-6 d-flex align-items-center">
+            <img src={% static 'extra/contact_us.svg' %} class="img-fluid" alt="">
+          </div>
+    </div>
+  </div>
+{% endblock %}
